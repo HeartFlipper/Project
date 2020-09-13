@@ -23,7 +23,7 @@ print(log.describe())                                          #gives you the me
 print(log.columns)                                             #gives you the names of the column
 print(log.head())                                              #gives you the first 5 rows
 print(log.tail())                                              #gives you the last 5 rows  
-c=log[["AVG_DOWNHOLE_PRESSURE","AVG_DOWNHOLE_TEMPERATURE"]]    #Change column name serially
+c=log[["AVG_DOWNHOLE_PRESSURE","AVG_DOWNHOLE_TEMPERATURE"]]    #Change column name serially #can also be used to print selected column
 c.columns=["ADP","ADT"]
 print(c)
 
@@ -65,8 +65,8 @@ print(prod.dropna(thresh=5))                       #drops all rows with >=5 NaN.
 
 prod1=pd.read_csv("csv/production_data_1.csv")
 prod2=pd.read_csv("csv/production_data_2.csv")
-m=prod1.merge(prod2,left_on="DATEPRD",right_on="DATEPRD")
+m=prod1.merge(prod2,left_on="DATEPRD",right_on="DATEPRD")        #merges two csv files based on a common column
 print(m)
 
-c=pd.concat([prod1,prod2])
+c=pd.concat([prod1,prod2])                                       #concatenates two csv files
 print(c)
