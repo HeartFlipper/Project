@@ -2,6 +2,8 @@ prop={"poro":0.25,"perm":150,"lith":"sst"}
 print(prop["lith"])
 
 import pandas as pd
+
+#DICTIONARY
 data={"poro":[0.1,0.2,0.3],"perm":[50,100,150]}
 table=pd.DataFrame(data)
 print(table)
@@ -10,13 +12,13 @@ data={"poro":[0.1,0.2,0.3],"perm":[50,100,150],"lith":["sst","shale","lst"]}
 table=pd.DataFrame(data)
 print(table.iloc[0:3,0:3])     
 #iloc[row,column]   
-#0,1,2 row is printed   #0,1,2 column is printed
+#0,1,2 row is printed  #0,1,2 column is printed
 
 print(table.loc[0:3,"poro":"lith"])  
 #poro to lith is printed
 #not to use i in front
 
-
+# Reading files from local directory
 log=pd.read_csv("csv/prod_data.csv")
 print(log.shape)
 print(log.describe())                                          #gives you the mean, mode, sd, etc. of a column. It gives data for only float and integer types
@@ -27,12 +29,14 @@ c=log[["AVG_DOWNHOLE_PRESSURE","AVG_DOWNHOLE_TEMPERATURE"]]    #Change column na
 c.columns=["ADP","ADT"]
 print(c)
 
+#Renaming and Sorting Columns
 log=pd.read_csv("csv/production_data_2.csv")
 log.rename(columns={"AVG_DOWNHOLE_TEMPERATURE":"ADT","FLOW_KIND":"FW"},inplace=True)     #"Original":"New". inplace is used to store data
 print(log)
 # print(log[(log["ADT"]==0)&(log["FW"]=="production")])
 print(log.sort_values(by="ADT",ascending=False))                #sorted by descending order of the values pf ADT
 
+#Getting unique values across a column
 prod=pd.read_csv("csv/prod_data.csv")
 print(prod.dtypes)                                              #gives you the type of each column
 u=prod["WELL_TYPE"].unique()                                    #gives you all the unique data in a column
@@ -40,6 +44,7 @@ u=prod["FLOW_KIND"].nunique()                                   #gives you total
 u=prod["FLOW_KIND"].value_counts()                              #gives you how many times each unique value occurs
 print(u)
 
+#Grouping Columns
 g=prod.groupby("FLOW_KIND")                                     #groups column by the each unique data. FLOW_KIND has "production" and "injection" 
 print(g.get_group("injection"))                                 #prints the data you wish from all the unique data
 print(g.mean())                                                 #gives you descriptive value for each unique data
@@ -49,9 +54,9 @@ print(g.count())
 g=prod.groupby(["FLOW_KIND","WELL_TYPE"])                       #multiple grouping
 print(g.reset_index())                                          #resets index from 0 to 1
 
+#Dealing with NaN
 print(prod.isna())                                              #true if the value is NaN
                                                                 #false if the value has a number
-
 print(prod.isna().sum())                                        #gives you the count null values in a column
 
 print(prod.fillna(method="ffill"))                              #forward fill from top to last NaN
@@ -64,6 +69,7 @@ print(prod.dropna(how="any",axis=1))                            #drops all colum
 print(prod.dropna(thresh=5))                                    #drops all rows with >=5 NaN. 
                                                                 #by default .dropna fenctions are set to rows
 
+#Merging and concatinating two local files  
 prod1=pd.read_csv("csv/production_data_1.csv")
 prod2=pd.read_csv("csv/production_data_2.csv")
 m=prod1.merge(prod2,left_on="DATEPRD",right_on="DATEPRD")       #merges two csv files based on a common column
