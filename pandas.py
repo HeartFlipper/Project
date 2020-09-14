@@ -59,9 +59,10 @@ print(prod.fillna(method="bfill"))                              #backward fill f
 
 print(prod.dropna(axis=1))                                      #drops all columns with NaN. axis=1 is for columns
 print(prod.dropna(axis=0))                                      #drops all rows with NaN. axis=0 is for rows
-print(prod.dropna(how="all"))                                   #drops all rows with NaN.
-print(prod.dropna(how="any"))                                   #drops all rows with NaN.
-print(prod.dropna(thresh=5))                                    #drops all rows with >=5 NaN.
+print(prod.dropna(how="all",axis=0))                            #drops all rows with NaN.
+print(prod.dropna(how="any",axis=1))                            #drops all columns with NaN.
+print(prod.dropna(thresh=5))                                    #drops all rows with >=5 NaN. 
+                                                                #by default .dropna fenctions are set to rows
 
 prod1=pd.read_csv("csv/production_data_1.csv")
 prod2=pd.read_csv("csv/production_data_2.csv")
