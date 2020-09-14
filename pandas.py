@@ -34,39 +34,39 @@ print(log)
 print(log.sort_values(by="ADT",ascending=False))                #sorted by descending order of the values pf ADT
 
 prod=pd.read_csv("csv/prod_data.csv")
-print(prod.dtypes)                          #gives you the type of each column
-u=prod["WELL_TYPE"].unique()                #gives you all the unique data in a column
-u=prod["FLOW_KIND"].nunique()               #gives you total no. of unique values in a column
-u=prod["FLOW_KIND"].value_counts()          #gives you how many times each unique value occurs
+print(prod.dtypes)                                              #gives you the type of each column
+u=prod["WELL_TYPE"].unique()                                    #gives you all the unique data in a column
+u=prod["FLOW_KIND"].nunique()                                   #gives you total no. of unique values in a column
+u=prod["FLOW_KIND"].value_counts()                              #gives you how many times each unique value occurs
 print(u)
 
-g=prod.groupby("FLOW_KIND")                   #groups column by the each unique data. FLOW_KIND has "production" and "injection" 
-print(g.get_group("injection"))               #prints the data you wish from all the unique data
-print(g.mean())                               #gives you descriptive value for each unique data
+g=prod.groupby("FLOW_KIND")                                     #groups column by the each unique data. FLOW_KIND has "production" and "injection" 
+print(g.get_group("injection"))                                 #prints the data you wish from all the unique data
+print(g.mean())                                                 #gives you descriptive value for each unique data
 print(g.sum()) 
 print(g.count()) 
 
-g=prod.groupby(["FLOW_KIND","WELL_TYPE"])       #multiple grouping
-print(g.reset_index())                          #resets index from 0 to 1
+g=prod.groupby(["FLOW_KIND","WELL_TYPE"])                       #multiple grouping
+print(g.reset_index())                                          #resets index from 0 to 1
 
-print(prod.isna())                              #true if the value is NaN
-                                                #false if the value has a number
+print(prod.isna())                                              #true if the value is NaN
+                                                                #false if the value has a number
 
-print(prod.isna().sum())                          #gives you the count null values in a column
+print(prod.isna().sum())                                        #gives you the count null values in a column
 
-print(prod.fillna(method="ffill"))                #forward fill from top to last NaN
-print(prod.fillna(method="bfill"))                #backward fill from bottom to top NaN
+print(prod.fillna(method="ffill"))                              #forward fill from top to last NaN
+print(prod.fillna(method="bfill"))                              #backward fill from bottom to top NaN
 
-print(prod.dropna(axis=1))                         #drops all columns with NaN. axis=1 is for columns
-print(prod.dropna(axis=0))                         #drops all rows with NaN. axis=0 is for rows
-print(prod.dropna(how="all"))                      #drops all rows with NaN.
-print(prod.dropna(how="any"))                      #drops all rows with NaN.
-print(prod.dropna(thresh=5))                       #drops all rows with >=5 NaN.
+print(prod.dropna(axis=1))                                      #drops all columns with NaN. axis=1 is for columns
+print(prod.dropna(axis=0))                                      #drops all rows with NaN. axis=0 is for rows
+print(prod.dropna(how="all"))                                   #drops all rows with NaN.
+print(prod.dropna(how="any"))                                   #drops all rows with NaN.
+print(prod.dropna(thresh=5))                                    #drops all rows with >=5 NaN.
 
 prod1=pd.read_csv("csv/production_data_1.csv")
 prod2=pd.read_csv("csv/production_data_2.csv")
-m=prod1.merge(prod2,left_on="DATEPRD",right_on="DATEPRD")        #merges two csv files based on a common column
+m=prod1.merge(prod2,left_on="DATEPRD",right_on="DATEPRD")       #merges two csv files based on a common column
 print(m)
 
-c=pd.concat([prod1,prod2])                                       #concatenates two csv files
+c=pd.concat([prod1,prod2])                                      #concatenates two csv files
 print(c)
